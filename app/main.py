@@ -25,11 +25,15 @@ def create_person_list(people: list) -> list:
         husband = one.get("husband")
         wife = one.get("wife")
 
-        person = Person(name=name, age=age)
+        if name in Person.people:
+            person = Person.people[name]
+        else:
+            person = Person(name=name, age=age)
         person_list.append(person)
-        if husband:
+        if husband and husband != person.name:
             person.add_husband(husband)
-        if wife:
+
+        if wife and wife != person.name:
             person.add_wife(wife)
     return person_list
 
